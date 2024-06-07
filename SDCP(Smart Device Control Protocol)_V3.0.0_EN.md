@@ -24,7 +24,7 @@ The client broadcasts the string "M99999" using the UDP protocol on port 3000 wi
         "MainboardIP": "192.168.1.2",  // Motherboard IP Address
         "MainboardID": "000000000001d354",  // Motherboard ID(16bit)
         "ProtocolVersion": "V3.0.0",  // Protocol Version
-        "FirmwareVersion": "V1.0.0" ,  // Firmware Version
+        "FirmwareVersion": "V1.0.0"  // Firmware Version
     }
 }
 ```
@@ -35,7 +35,7 @@ Client connects to the motherboard WebSocket address: ws://${MainboardIP}:3030/w
 
 ## Topic
 
-Topic Explanation: ({$MainboardID} refers to the motherboard ID)
+Topic Explanation: (${MainboardID} refers to the motherboard ID)
 
 ```text
 SDCP Control Request (Client -> Motherboard): sdcp/request/${MainboardID}
@@ -88,7 +88,7 @@ The attribute information definition object content includes:
         "MainboardID": "000000000001d354", // Motherboard ID(16)
         "NumberOfVideoStreamConnected": 1,  // Number of Connected Video Streams
         "MaximumVideoStreamAllowed": 1,  // Maximum Number of Connections for Video Streams
-        "NetworkStatus": "wlan"|"eth",  // Network Connection Status, WiFi/Ethernet Port
+        "NetworkStatus": "'wlan' | 'eth'",  // Network Connection Status, WiFi/Ethernet Port
         "UsbDiskStatus": 0,  // USB Drive Connection Status. 0: Disconnected, 1: Connected
         "Capabilities":[                            
             "FILE_TRANSFER",  // Support File Transfer
@@ -96,9 +96,8 @@ The attribute information definition object content includes:
             "VIDEO_STREAM"  // Support Video Stream Transmission
         ],  // Supported Sub-protocols on the Motherboard
         "SupportFileType":[
-        	"CTB",  // Supports CTB File Type
+            "CTB"  // Supports CTB File Type
         ],
-
         //Device Self-Check Status
         "DevicesStatus":{
             "TempSensorStatusOfUVLED": 0, // UVLED Temperature Sensor Status, 0: Disconnected, 1: Normal, 2: Abnormal
@@ -107,21 +106,19 @@ The attribute information definition object content includes:
             "ZMotorStatus": 0,  // Z-Axis Motor Connection Status, 0: Disconnected, 1: Connected
             "RotateMotorStatus": 0,  // Rotary Axis Motor Connection Status, 0: Disconnected, 1: Connected
             "RelaseFilmState": 0,  // Release Film Status, 0: Abnormal, 1: Normal
-            "XMotorStatus": 0,  // X-Axis Motor Connection Status, 0: Disconnected, 1: Connected
+            "XMotorStatus": 0  // X-Axis Motor Connection Status, 0: Disconnected, 1: Connected
         },
-        
         "ReleaseFilmMax": 0,  // Maximum number of uses (service life) for the release film
         "TempOfUVLEDMax": 0,  // Maximum operating temperature for UVLED(℃)
         "CameraStatus": 0,  // Camera Connection Status, 0: Disconnected, 1: Connected 
         "RemainingMemory": 123455,  // Remaining File Storage Space Size(bit)
         "TLPNoCapPos": 50.0,  // Model height threshold for not performing time-lapse photography (mm)
         "TLPStartCapPos": 30.0,  // The print height at which time-lapse photography begins (mm)
-        "TLPInterLayers": 20,  // Time-lapse photography shooting interval layers  
-        
+        "TLPInterLayers": 20  // Time-lapse photography shooting interval layers    
     }, 
     "MainboardID":"ffffffff",  // Motherboard ID
-    "TimeStamp":1687069655  // Timestamp
-    "Topic":"sdcp/attributes/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "TimeStamp":1687069655,  // Timestamp
+    "Topic":"sdcp/attributes/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -154,11 +151,11 @@ The status message definition object content includes:
             "Filename": "HitWork.ctb",  // Print File Name
             "ErrorNumber": 1, // Refer to the following text
             "TaskId": "xxx"  // Current Task ID
-        },
+        }
     }, 
     "MainboardID": "ffffffff",  // Motherboard ID
     "TimeStamp": 1687069655 ,  // Timestamp
-    "Topic": "sdcp/status/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/status/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -252,13 +249,13 @@ Response Parameters
     "Data": {
         "Cmd": 255,  // Request Command.
         "Data": {
-            "Ack" : 0,  // 0 represents success, other details are provided in the following text.
+            "Ack" : 0  // 0 represents success, other details are provided in the following text.
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -321,13 +318,13 @@ Response Parameters
     "Data": {
         "Cmd": 0,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -360,13 +357,13 @@ Response Parameters
     "Data": {
         "Cmd": 1,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -381,7 +378,7 @@ Request Parameters
         "Cmd": 128,  // Request Command.
         "Data": {
             "Filename": "hitwork.ctb",  // File Name or File Path
-            "StartLayer": 0,  // Start Printing Layer Number
+            "StartLayer": 0  // Start Printing Layer Number
         },
         "RequestID": "000000000001d354",  // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
@@ -400,13 +397,13 @@ Response Parameters
     "Data": {
         "Cmd": 128,  // Request Command.
         "Data": {
-            "Ack" : 0,  // 0 represents success, other details are provided in the following text.
+            "Ack" : 0  // 0 represents success, other details are provided in the following text.
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -453,13 +450,13 @@ Response Parameters
     "Data": {
         "Cmd": 129,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -490,13 +487,13 @@ Response Parameters
     "Data": {
         "Cmd": 130,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -527,13 +524,13 @@ Response Parameters
     "Data": {
         "Cmd": 131,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -564,13 +561,13 @@ Response Parameters
     "Data": {
         "Cmd": 132,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -601,13 +598,13 @@ Response Parameters
     "Data": {
         "Cmd": 133,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -621,7 +618,7 @@ Request Parameters
     "Data":{
         "Cmd": 192,  // Request Command.
         "Data": {
-            "Name": "newName",  // New Printer Name
+            "Name": "newName"  // New Printer Name
         },
         "RequestID": "000000000001d354",  // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
@@ -640,13 +637,13 @@ Response Parameters
     "Data": {
         "Cmd": 192,  // Request Command.
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // Request ID
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -703,7 +700,7 @@ Response Parameters
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -744,7 +741,7 @@ Response Parameters
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -782,7 +779,7 @@ Response Parameters
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -830,7 +827,7 @@ Response Parameters
                     "CurrentLayerTalVolume" : 0.02,  // Total Volume of Printed Layers(ml)
                     "TimeLapseVideoStatus": 0,  // Time-lapse photography status, 0: Not shot, 1: Time-lapse photography file exists, 2: Deleted, 3: Generating, 4: Generation failed.
                     "TimeLapseVideoUrl": "xxxx",  // URL for the time-lapse photography video
-                    "ErrorStatusReason": 0,  // Status Code, refer to the subsequent text.
+                    "ErrorStatusReason": 0  // Status Code, refer to the subsequent text.
                 }
             ] // Task Details
         },
@@ -838,7 +835,7 @@ Response Parameters
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -919,7 +916,7 @@ Response Parameters
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -958,7 +955,7 @@ Response Parameters
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/response/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/response/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -971,12 +968,12 @@ When there is an error message on the motherboard, it will be proactively report
     "Id": "xxx", // Machine brand identifier, 32-bit UUID
     "Data": {
         "Data": {
-            "ErrorCode": "xxxxxx",  // Error Code, please refer to the error code definition.
+            "ErrorCode": "xxxxxx"  // Error Code, please refer to the error code definition.
         },               
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/error/$MainboardID"  // Topic, used to distinguish the type of reported message
+    "Topic": "sdcp/error/${MainboardID}"  // Topic, used to distinguish the type of reported message
 }
 ```
 
@@ -1005,7 +1002,7 @@ When there is a need to proactively report information, the motherboard will rep
         "MainboardID": "ffffffff",  // Motherboard ID
         "TimeStamp":1687069655  // Timestamp
     },
-    "Topic": "sdcp/notice/$MainboardID"  // Topic, used to distinguish the types of reported messages
+    "Topic": "sdcp/notice/${MainboardID}"  // Topic, used to distinguish the types of reported messages
 }
 ```
 
