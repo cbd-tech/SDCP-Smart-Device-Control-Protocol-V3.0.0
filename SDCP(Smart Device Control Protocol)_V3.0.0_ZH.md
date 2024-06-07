@@ -22,7 +22,7 @@ SDCP 协议是客户端与主板交互的应用层协议，包含命令控制、
         "MainboardIP": "192.168.1.2",  // 主板IP地址
         "MainboardID": "000000000001d354",  // 主板ID(16bit)
         "ProtocolVersion": "V3.0.0",  // 协议版本
-        "FirmwareVersion": "V1.0.0" ,  // 固件版本
+        "FirmwareVersion": "V1.0.0"   // 固件版本
     }
 }
 ```
@@ -33,7 +33,7 @@ SDCP 协议是客户端与主板交互的应用层协议，包含命令控制、
 
 ## 消息主题
 
-Topic说明：（{$MainboardID}是指主板ID）
+Topic说明：（${MainboardID}是指主板ID）
 
 ```text
 SDCP控制请求(客户端->主板): sdcp/request/${MainboardID}
@@ -87,7 +87,7 @@ SDCP通知信息(主板->客户端)：sdcp/notice/${MainboardID}
         "MainboardID": "000000000001d354", // 主板ID(16)
         "NumberOfVideoStreamConnected": 1,  // 已连接视频流
         "MaximumVideoStreamAllowed": 1,  // 最多可连接的视频流
-        "NetworkStatus": "wlan"|"eth",  // 网络连接状态，wifi/网口
+        "NetworkStatus": "'wlan' | 'eth'",  // 网络连接状态，wifi/网口
         "UsbDiskStatus": 0,  // U盘接入状态 0：未接入，1：已接入
         "Capabilities":[                            
             "FILE_TRANSFER",  // 支持文件传输
@@ -95,9 +95,8 @@ SDCP通知信息(主板->客户端)：sdcp/notice/${MainboardID}
             "VIDEO_STREAM"  // 支持视频流传输
         ],  // 主板端支持的子协议
         "SupportFileType":[
-        	"CTB",  // 支持CTB文件类型
+            "CTB"  // 支持CTB文件类型
         ],
-
         //设备自检状态
         "DevicesStatus":{
             "TempSensorStatusOfUVLED": 0, // UVLED温度传感器状态,0未接入，1正常，2异常
@@ -106,21 +105,19 @@ SDCP通知信息(主板->客户端)：sdcp/notice/${MainboardID}
             "ZMotorStatus": 0,  // Z轴电机连接状态，0断开，1连接
             "RotateMotorStatus": 0,  // 旋转轴电机连接状态，0断开，1连接
             "RelaseFilmState": 0,  // 离型膜状态，0异常，1正常
-            "XMotorStatus": 0,  // X轴电机连接状态，0断开，1连接
+            "XMotorStatus": 0  // X轴电机连接状态，0断开，1连接
         },
-        
         "ReleaseFilmMax": 0,  // 离型膜最大次数（寿命）
         "TempOfUVLEDMax": 0,  // UVLED最大工作温度(℃)
         "CameraStatus": 0,  // 摄像头接入状态 0断开， 1连接 
         "RemainingMemory": 123455,  // 剩余的文件存储空间大小(bit)
         "TLPNoCapPos": 50.0,  // 不进行延时摄影拍摄的模型高度阈值(mm)
         "TLPStartCapPos": 30.0,  // 开始进行延时摄影拍摄的模型高度(mm)
-        "TLPInterLayers": 20,  // 延时摄影拍摄间隔层数 
-        
+        "TLPInterLayers": 20  // 延时摄影拍摄间隔层数 
     }, 
     "MainboardID":"ffffffff",  // 主板ID
-    "TimeStamp":1687069655  // 时间戳
-    "Topic":"sdcp/attributes/$MainboardID"  // 主题，用于区分上报消息的类型
+    "TimeStamp":1687069655,  // 时间戳
+    "Topic":"sdcp/attributes/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -154,11 +151,11 @@ SDCP通知信息(主板->客户端)：sdcp/notice/${MainboardID}
             "Filename": "HitWork.ctb",  // 打印文件名称
             "ErrorNumber": 1, // 错误码，参考后文
             "TaskId": "xxx"  // 当前任务ID
-        },
+        }
     }, 
     "MainboardID": "ffffffff",  // 主板ID
     "TimeStamp": 1687069655 ,  // 时间戳
-    "Topic": "sdcp/status/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/status/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -252,13 +249,13 @@ typedef enum
     "Data": {
         "Cmd": 255,  // 请求命令
         "Data": {
-            "Ack" : 0,  // 0代表成功，其他详见下文
+            "Ack" : 0  // 0代表成功，其他详见下文
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -321,13 +318,13 @@ typedef enum
     "Data": {
         "Cmd": 0,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -360,13 +357,13 @@ typedef enum
     "Data": {
         "Cmd": 1,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -381,7 +378,7 @@ typedef enum
         "Cmd": 128,  // 请求命令
         "Data": {
             "Filename": "hitwork.ctb",  // 文件名或者文件路径
-            "StartLayer": 0,  // 从开始打印层数
+            "StartLayer": 0  // 从开始打印层数
         },
         "RequestID": "000000000001d354",  // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
@@ -400,13 +397,13 @@ typedef enum
     "Data": {
         "Cmd": 128,  // 请求命令
         "Data": {
-            "Ack" : 0,  // 0代表成功，其他详见下文
+            "Ack" : 0  // 0代表成功，其他详见下文
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -453,13 +450,13 @@ typedef enum
     "Data": {
         "Cmd": 129,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -490,13 +487,13 @@ typedef enum
     "Data": {
         "Cmd": 130,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -527,13 +524,13 @@ typedef enum
     "Data": {
         "Cmd": 131,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -564,13 +561,13 @@ typedef enum
     "Data": {
         "Cmd": 132,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -601,13 +598,13 @@ typedef enum
     "Data": {
         "Cmd": 133,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -621,7 +618,7 @@ typedef enum
     "Data":{
         "Cmd": 192,  // 请求命令
         "Data": {
-            "Name": "newName",  // 打印机新名称
+            "Name": "newName"  // 打印机新名称
         },
         "RequestID": "000000000001d354",  // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
@@ -640,13 +637,13 @@ typedef enum
     "Data": {
         "Cmd": 192,  // 请求命令
         "Data": {
-            "Ack" : 0,
+            "Ack" : 0
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -702,7 +699,7 @@ typedef enum
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -743,7 +740,7 @@ typedef enum
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -781,7 +778,7 @@ typedef enum
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -829,7 +826,7 @@ typedef enum
                     "CurrentLayerTalVolume" : 0.02,  // 已打印层数总体积(ml)
                     "TimeLapseVideoStatus": 0,  // 延时摄影状态 0:未拍摄延时摄影文件 1:存在延时摄影文件 2:延时摄影文件已删除 3:延时摄影生成中  4:延时摄影生成失败
                     "TimeLapseVideoUrl": "xxxx",  // 延时摄影视频的URL
-                    "ErrorStatusReason": 0,  // 状态码，参照下文
+                    "ErrorStatusReason": 0  // 状态码，参照下文
                 }
             ] // 历史记录的详情
         },
@@ -837,7 +834,7 @@ typedef enum
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -918,7 +915,7 @@ SDCP_PRINT_CAUSE_TANK_TEMP_SENSOR_ERRO = 34  // 料槽温度传感器温度过�
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -951,13 +948,13 @@ SDCP_PRINT_CAUSE_TANK_TEMP_SENSOR_ERRO = 34  // 料槽温度传感器温度过�
     "Data": {
         "Cmd": 387,  // 请求命令
         "Data":{
-            "Ack": 0,  // 0: 成功; 1: 未知错误
+            "Ack": 0  // 0: 成功; 1: 未知错误
         },
         "RequestID": "000000000001d354", // 请求ID
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/response/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/response/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -970,12 +967,12 @@ SDCP_PRINT_CAUSE_TANK_TEMP_SENSOR_ERRO = 34  // 料槽温度传感器温度过�
     "Id": "xxx", //用于机型隔离
     "Data": {
         "Data": {
-            "ErrorCode": "xxxxxx",  // 错误码, 请查询错误码定义
+            "ErrorCode": "xxxxxx"  // 错误码, 请查询错误码定义
         },               
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/error/$MainboardID"  // 主题，用于区分上报消息的类型
+    "Topic": "sdcp/error/${MainboardID}"  // 主题，用于区分上报消息的类型
 }
 ```
 
@@ -1004,7 +1001,7 @@ typedef enum
         "MainboardID": "ffffffff",  // 主板ID
         "TimeStamp":1687069655  // 时间戳
     },
-    "Topic": "sdcp/notice/$MainboardID"  // 主题，用于区分上报的信息是属于什么类型
+    "Topic": "sdcp/notice/${MainboardID}"  // 主题，用于区分上报的信息是属于什么类型
 }
 ```
 
@@ -1080,4 +1077,3 @@ File: (binary)
 | -2 | offset not match | 文件偏移与当前文件不匹配 |
 | -3 | file open failed | 文件无法打开 |
 | -4 | unknow error | 其他未知错误 |
-
